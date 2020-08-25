@@ -1,0 +1,22 @@
+{
+  "name": "clipboard",
+  "version": "1.0.0",
+  "description": "clipboard frontend",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MANUJNARAYANAA/clipboard.git"
+  },
+  "author": "Manuj Narayanaa Rajaram",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MANUJNARAYANAA/clipboard/issues"
+  },
+  "homepage": "https://github.com/MANUJNARAYANAA/clipboard#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.2"
+  }
+}
