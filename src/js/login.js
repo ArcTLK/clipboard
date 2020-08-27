@@ -1,9 +1,8 @@
-const apiUrl = 'http://localhost:3000';
 
 
 function onLogin() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('exampleInputEmail1').value;
+    const password = document.getElementById('exampleInputPassword1').value;
     axios({
         method: 'post',
         url: apiUrl + '/user/login',
@@ -11,7 +10,9 @@ function onLogin() {
             Authorization: `Basic ${btoa(email + ':' + password)}`
         }
     }).then(response => {
+        sessionStorage.setItem('access-token', response.data.accessToken);
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
+        location.href = '/dashboard.html';
     }).catch(error => {
         console.error(error);
     });
