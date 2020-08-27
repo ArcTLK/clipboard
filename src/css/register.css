@@ -1,7 +1,11 @@
 .form-container{
-    position: absolute;
+    position: relative;
     background: #fff;   
     padding: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    top: 15vh;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #000;
 }
