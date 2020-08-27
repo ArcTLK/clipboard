@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="login">
+        <h1>Login to Web App</h1>
+        <form method="post" action="">
+          <p><input type="email" name="login" id="email" placeholder="Email"></p>
+          <p><input type="password" name="password" id="password" placeholder="Password"></p>
+          <p class="remember_me">
+            <label>
+              <input type="checkbox" name="remember_me" id="remember_me">
+              Remember me on this computer
+            </label>
+          </p>
+          <p class="submit"><input type="button" name="commit" value="Login" onclick="onLogin()"></p>
+        </form>
+      </div>
+      
+      <div class="login-help">
+        <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
+      </div>
+
+      <button onclick="dummyRequest()">Test</button>
+      
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="./js/login.js"></script>
+</body>
+</html>
+
