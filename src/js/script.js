@@ -14,3 +14,32 @@ for(i=0;i<expand.length;i++){
         }
     })
 }
+
+
+
+function data() {
+    return {
+        clips: [],
+        newClip: {
+            content: ''
+        },
+        getClips() {
+            axios.get(apiUrl + '/clipboard').then(response => {
+                this.clips = response.data;
+            }).catch(error => {
+                console.error(error);
+            });
+        },
+        onAddClipText() {
+            axios.post(apiUrl + '/clipboard', {
+                type: 'text',
+                content: this.newClip.content
+            }).then(response => {
+                this.clips.push(response.data);
+                $('#modal').modal('hide');
+            }).catch(error => {
+                console.error(error);
+            });
+        }
+    };
+}
