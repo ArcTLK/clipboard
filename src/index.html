@@ -2,30 +2,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Bootstrap CDN-->
+    <!--Bootstrap CDN-->    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/register.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="./css/login.css">
     <title>Login</title>
 </head>
 <body>
-    <div class="login">
-        <form class="form-container" onsubmit="return false;">
+    <div class="container">
+        <h2 class="display-4 p-4 text-center">Login</h2>
+        <form class="login-form p-3 mx-auto" onsubmit="return false;">
+            <div class="brand"><i class="far fa-clipboard"></i> Clipboard</div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Email</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" aria-describedby="emailHelp">
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <input type="password" class="form-control" placeholder="Password" id="exampleInputPassword1">
             </div>
             <button class="btn btn-primary d-block w-100" onclick="onLogin()">
               Login
             </button>
-            <div class="help">
-                <small>Forgot your password?<a href="#">Reset</a></small><br>
-                <small>Don't have an account?<a href="register.html">SignUp</a></small>
+            <div class="p-3 text-center">
+                <p class="m-0"><a href="#">Forgot password?</a></p>
+                <p class="m-0">Don't have an account? <a href="register.html">Sign up</a></p>
             </div>
-          </form>
+        </form>
     </div>
 
     <!--<button onclick="dummyRequest()">Test</button>-->
