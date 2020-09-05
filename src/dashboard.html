@@ -5,6 +5,7 @@
     <title>Clipboard</title>
     <!--Bootstrap CDN-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body x-data="data()" x-init="getClips()">
@@ -28,8 +29,10 @@
       <div class="row">
         <template x-for="item in clips">
           <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="card shadow m-3">
-              <div class="body p-2" x-text="item.content"></div>
+            <div class="card shadow m-3 click-anywhere" class="position: relative" @click="onClickCard(item)">
+              <div class="body p-2" x-text="item.content" x-show="!item.editing"></div>
+              <span x-show="item.editing" class="close-icon" @click="onCloseCard(item)">&times;</span>
+              <textarea x-show="item.editing" x-model="item.content"></textarea>
             </div>
           </div>
         </template>
@@ -46,7 +49,11 @@
               </button>
             </div>
             <div class="modal-body">
-              <form onsubmit="return false;">
+              <div class="btn-group w-100 mb-4" role="group">
+                <button type="button" class="btn btn-secondary" x-bind:class="{ 'active': mode == 'text' }" @click="mode = 'text'">Text</button>
+                <button type="button" class="btn btn-secondary" x-bind:class="{ 'active': mode == 'image' }" @click="mode = 'image'">Image</button>
+              </div>
+              <form onsubmit="return false;" x-show="mode == 'text'">
                 <div class="form-group">
                   <label for="newClipContent">Content</label>
                   <input type="text" class="form-control" id="newClipContent" required placeholder="Content" x-model="newClip.content">
@@ -61,9 +68,13 @@
       </div>
       <!--Bootstrap CDN-->
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
       <script src="./js/main.js"></script>
       <script src="./js/script.js"></script>
       <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.min.js"></script>

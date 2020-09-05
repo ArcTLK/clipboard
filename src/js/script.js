@@ -15,14 +15,13 @@ for(i=0;i<expand.length;i++){
     })
 }
 
-
-
 function data() {
     return {
         clips: [],
         newClip: {
             content: ''
         },
+        mode: 'text',
         getClips() {
             axios.get(apiUrl + '/clipboard').then(response => {
                 this.clips = response.data;
@@ -40,6 +39,12 @@ function data() {
             }).catch(error => {
                 console.error(error);
             });
+        },
+        onClickCard(item) {
+            item.editing = true;
+        },
+        onCloseCard(item) {
+            item.editing = false;
         }
     };
 }

@@ -14,17 +14,8 @@ function onLogin() {
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
         location.href = '/dashboard.html';
     }).catch(error => {
-        console.error(error);
+        toastr.error(error.response.data);
     });
-}
-
-function dummyRequest() {
-    axios.get(apiUrl + '/user/clipboard').then(data => {
-        console.log(data);
-        
-    }).catch(error => {
-        console.error(error);
-    })
 }
 
 /* When uploading image

@@ -13,3 +13,8 @@ function onLogout() {
     sessionStorage.removeItem('access-token');
     location.href = '/';
 }
+
+toastr.options = {
+    "progressBar": true,
+    "positionClass": "toast-bottom-right",
+};
