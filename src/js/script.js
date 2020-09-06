@@ -1,19 +1,19 @@
-var expand=document.getElementsByClassName("expand");
-
-var i;
-
-for(i=0;i<expand.length;i++){
-    expand[i].addEventListener("click",function(){
-        this.classList.toggle("activate");
-        var content=this.nextElementSibling;
-        if(content.style.display==="block"){
-            content.style.display="none";
-        }
-        else{
-            content.style.display="block";
-        }
+/* When uploading image
+ * Include header:
+    Content-Type: 'multipart/form-data'
+    And use it like this
+    const formdata = new FormData();
+    formdata.append('key', 'value');
+    // append a file like  this too
+    axios({
+        method: 'post',
+        url: url,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        data: formdata
     })
-}
+ */
 
 function data() {
     return {
@@ -26,7 +26,7 @@ function data() {
             axios.get(apiUrl + '/clipboard').then(response => {
                 this.clips = response.data;
             }).catch(error => {
-                console.error(error);
+                toastr.error(error.response.data);
             });
         },
         onAddClipText() {
@@ -36,15 +36,31 @@ function data() {
             }).then(response => {
                 this.clips.push(response.data);
                 $('#modal').modal('hide');
+                toastr.success('New clip added!');
             }).catch(error => {
-                console.error(error);
+                toastr.error(error.response.data);
             });
         },
-        onClickCard(item) {
+        onClickCard(event, item) {
             item.editing = true;
+            item.oldContent = item.content;
+            setTimeout(() => $(event.target).children('textarea').focus());
         },
-        onCloseCard(item) {
+        onCloseCard(event, item) {
+            event.stopPropagation();
+            item.content = item.oldContent;
             item.editing = false;
+        },
+        onSaveCard(event, item) {
+            event.stopPropagation();
+            axios.put(apiUrl + `/clipboard/${item.id}`, {
+                content: item.content
+            }).then(response => {
+                item.editing = false;
+                toastr.success('Clip updated!');
+            }).catch(error => {
+                toastr.error(error.response.data);
+            });
         }
     };
 }

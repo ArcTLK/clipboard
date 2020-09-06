@@ -4,8 +4,8 @@ function onRegister() {
     const password = $('#exampleInputPassword1').val();
     const confirmPassword = $('#exampleConfirmPassword').val();
 
-    if (password !== confirmPassword) {
-        // TODO: ERROR passwords not matching
+    if (password !== confirmPassword) {        
+        toastr.error('The entered passwords do not match!');
         return;
     }
     axios.post(apiUrl + '/user/register', {
@@ -17,6 +17,6 @@ function onRegister() {
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
         location.href = '/dashboard.html';
     }).catch(error => {
-        console.error(error);
+        toastr.error(error.response.data);
     });
 }

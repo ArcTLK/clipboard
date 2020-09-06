@@ -2,10 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/clipboard-regular.svg" sizes="any" type="image/svg+xml">
     <title>Clipboard</title>
     <!--Bootstrap CDN-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body x-data="data()" x-init="getClips()">
@@ -14,7 +16,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
             <a class="nav-link" href="#">Trash</a>
@@ -23,16 +25,19 @@
           </div>
         </div>
       </nav>
-      <div class="m-2">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modal">Add Clip</button>
-      </div>
+      <button class="btn btn-primary p-4 rounded-circle custom-fab shadow" title="Add clip" data-toggle="modal" data-target="#modal">
+        <i class="fas fa-plus"></i>
+      </button>
       <div class="row">
         <template x-for="item in clips">
           <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-            <div class="card shadow m-3 click-anywhere" class="position: relative" @click="onClickCard(item)">
-              <div class="body p-2" x-text="item.content" x-show="!item.editing"></div>
-              <span x-show="item.editing" class="close-icon" @click="onCloseCard(item)">&times;</span>
-              <textarea x-show="item.editing" x-model="item.content"></textarea>
+            <div class="card shadow m-3 rounded" x-bind:style="item.editing ? 'position: relative; cursor: pointer; min-height: 8rem; border: 0px transparent' : 'position: relative; cursor: pointer; min-height: 8rem;'" title="Click to modify" @click="onClickCard(event, item)">
+              <div class="body p-2" style="white-space: pre;" x-text="item.content" x-show="!item.editing"></div>
+              <div class="custom-icon-block" x-show="item.editing">
+                <i class="icon fas fa-times text-danger" title="Undo changes" @click="onCloseCard(event, item)"></i>
+                <i class="icon fas fa-check text-success" title="Save changes" @click="onSaveCard(event, item)"></i>
+              </div>
+              <textarea x-show="item.editing" x-model="item.content" class="p-2 rounded" style="padding-right: 2rem; min-height: 8rem;"></textarea>
             </div>
           </div>
         </template>
