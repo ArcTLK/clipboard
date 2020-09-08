@@ -44,7 +44,7 @@ function data() {
         onClickCard(event, item) {
             item.editing = true;
             item.oldContent = item.content;
-            setTimeout(() => $(event.target).children('textarea').focus());
+            setTimeout(() => $(event.target).children('textarea').focus() && $(event.target).siblings('textarea').focus(), 10);
         },
         onCloseCard(event, item) {
             event.stopPropagation();
