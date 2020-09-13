@@ -1,6 +1,7 @@
 const accessToken = sessionStorage.getItem('access-token');
 
-window.apiUrl = 'http://localhost:3000';
+//window.apiUrl = 'http://localhost:3000';
+window.apiUrl = 'https://clipboard-api-og.herokuapp.com';
 
 if (accessToken) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
